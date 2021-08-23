@@ -7,6 +7,12 @@ export default {
 		const response = await this.$axios.$get(
 			'http://fakeapi.jsonparseronline.com/posts',
 		)
-		commit('loadPosts', response)
+		commit(
+			'loadPosts',
+			response.map(post => ({
+				...post,
+				imageUrl: '/default.jpeg',
+			})),
+		)
 	},
 }

@@ -22,6 +22,7 @@
 						<v-list-item-title v-text="'خوش آمدید'" />
 					</v-list-item-content>
 				</v-list-item>
+				<v-divider></v-divider>
 				<!-- list of pages to navigate -->
 				<v-list-item
 					v-for="(item, i) in items"
@@ -30,9 +31,6 @@
 					router
 					exact
 				>
-					<v-list-item-action>
-						<v-icon>{{ item.icon }}</v-icon>
-					</v-list-item-action>
 					<v-list-item-content>
 						<v-list-item-title v-text="item.title" />
 					</v-list-item-content>
@@ -41,7 +39,10 @@
 		</v-navigation-drawer>
 		<!-- copyright sign and the year we are in -->
 		<v-footer :absolute="!fixed" app yellow accent-1>
-			<span>&copy; {{ new Date().getFullYear() }}</span>
+			<span
+				>&copy; {{ new Date().getFullYear() }} - ساخته شده توسط ایمان
+				غواصیه</span
+			>
 		</v-footer>
 	</v-app>
 </template>
@@ -54,14 +55,12 @@ export default {
 			fixed: false,
 			items: [
 				{
-					icon: 'mdi-apps',
-					title: 'Welcome',
+					title: 'صفحه‌ی اصلی',
 					to: '/',
 				},
 				{
-					icon: 'mdi-chart-bubble',
-					title: 'Inspire',
-					to: '/inspire',
+					title: 'مدیریت وبلاگ',
+					to: '/panel',
 				},
 			],
 			miniVariant: false,

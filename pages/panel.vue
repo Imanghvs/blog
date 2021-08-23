@@ -1,5 +1,5 @@
 <template>
-	<v-container fluid class="container pa-3">
+	<v-container fluid class="pa-3">
 		<v-layout wrap>
 			<v-flex xs12 md10>
 				<!-- contents heading -->
@@ -9,7 +9,7 @@
 					<v-list-item
 						v-for="post in posts.slice((page - 1) * 10, page * 10)"
 						:key="post.id"
-						class="item-container post teal darken-1 mb-2"
+						class="item-container teal darken-1 mb-2"
 					>
 						<p class="title-paragraph mb-0">
 							{{
@@ -34,7 +34,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 export default {
-	name: 'Panel',
+	name: 'panel',
 	data() {
 		return {
 			page: 1,
@@ -46,7 +46,7 @@ export default {
 	computed: {
 		...mapGetters(['posts']),
 	},
-	created: function () {
+	created() {
 		this.getAllPosts()
 	},
 }
@@ -56,14 +56,8 @@ export default {
 .button {
 	margin: 3px;
 }
-.container {
-	direction: rtl;
-}
 .item-container {
 	border-radius: 6px;
-}
-.post {
-	color: white !important;
 }
 .title-paragraph {
 	color: white;
