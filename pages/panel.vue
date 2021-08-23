@@ -9,9 +9,13 @@
 					<v-list-item
 						v-for="post in posts.slice((page - 1) * 10, page * 10)"
 						:key="post.id"
-						class="item-container post grey darken-4 mb-1"
+						class="item-container post teal darken-1 mb-2"
 					>
-						<p class="title-paragraph mb-0">{{ post.title.slice(0, 25) }}...</p>
+						<p class="title-paragraph mb-0">
+							{{
+								post.title.slice(0, 24) + (post.title.length > 25 ? '...' : '')
+							}}
+						</p>
 						<v-spacer></v-spacer>
 						<!-- edit a post (button) -->
 						<v-btn class="button edit-button">ویرایش</v-btn>
@@ -56,13 +60,14 @@ export default {
 	direction: rtl;
 }
 .item-container {
-	border-radius: 4px;
+	border-radius: 6px;
 }
 .post {
 	color: white !important;
 }
 .title-paragraph {
-	color: yellow;
+	color: white;
+	font-weight: bold;
 }
 .edit-button {
 	color: green;

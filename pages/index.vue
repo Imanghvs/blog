@@ -1,15 +1,13 @@
 <template>
-  <div class="container">صفحه‌ی اصلی</div>
+	<v-container class="container">صفحه‌ی اصلی</v-container>
 </template>
 
 <script>
-export default {
-
-}
+export default {}
 </script>
 
 <style scoped>
-  .container {
-    direction: rtl;
-  }
+.container {
+	direction: rtl;
+}
 </style>

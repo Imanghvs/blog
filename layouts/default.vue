@@ -40,7 +40,7 @@
 			</v-list>
 		</v-navigation-drawer>
 		<!-- copyright sign and the year we are in -->
-		<v-footer :absolute="!fixed" app>
+		<v-footer :absolute="!fixed" app yellow accent-1>
 			<span>&copy; {{ new Date().getFullYear() }}</span>
 		</v-footer>
 	</v-app>
