@@ -36,7 +36,9 @@ export default {
 	axios: {},
 
 	// Vuetify module configuration
-	vuetify: {},
+	vuetify: {
+		rtl: true,
+	},
 
 	build: {},
 }
