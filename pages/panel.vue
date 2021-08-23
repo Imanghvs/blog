@@ -7,7 +7,7 @@
 				<!-- list of posts -->
 				<v-list two-line class="transparent">
 					<v-list-item
-						v-for="post in posts"
+						v-for="post in posts.slice((page - 1) * 10, page * 10)"
 						:key="post.id"
 						class="item-container post grey darken-4 mb-1"
 					>
@@ -21,7 +21,7 @@
 				</v-list>
 			</v-flex>
 			<v-flex xs12 md10>
-				<v-pagination v-model="page"></v-pagination>
+				<v-pagination v-model="page" :length="posts.length / 10"></v-pagination>
 			</v-flex>
 		</v-layout>
 	</v-container>
@@ -31,11 +31,16 @@
 import { mapActions, mapGetters } from 'vuex'
 export default {
 	name: 'Panel',
+	data() {
+		return {
+			page: 1,
+		}
+	},
 	methods: {
 		...mapActions(['getAllPosts']),
 	},
 	computed: {
-		...mapGetters(['posts', 'page']),
+		...mapGetters(['posts']),
 	},
 	created: function () {
 		this.getAllPosts()
