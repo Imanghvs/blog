@@ -19,11 +19,17 @@ export default {
 		return { id: this.$route.params.id, post: {} }
 	},
 	async mounted() {
-		const post =
-			this.$route.query ||
-			(await this.$axios
-				.get(`http://fakeapi.jsonparseronline.com/posts/${this.id}`)
-				.then(res => res.data))
+		const post = this.$route.query.title
+			? this.$route.query
+			: await this.$axios.$get(
+					`http://fakeapi.jsonparseronline.com/posts/${this.id}`,
+			  )
+		// since this image address has sanctioned Iran, we substitute it
+		// with a static file
+		post.imageUrl =
+			post.imageUrl == 'https://i.picsum.photos/id/348/600/300.jpg'
+				? '/default.jpeg'
+				: post.imageUrl
 		this.post = post
 	},
 }
