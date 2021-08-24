@@ -70,7 +70,7 @@ export default {
 			miniVariant: false,
 			right: true,
 			rightDrawer: false,
-			title: 'ایمانگرام',
+			title: 'ایــــمــانـــگـــرام',
 		}
 	},
 }
