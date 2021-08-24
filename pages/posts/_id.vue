@@ -23,6 +23,7 @@
 					:key="comment.id"
 					:authorName="comment.authorName || 'ناشناس'"
 					:body="comment.body"
+					:title="post.title"
 				></Comment>
 			</v-col>
 		</v-row>

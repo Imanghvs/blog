@@ -2,12 +2,17 @@
 	<v-container fluid>
 		<v-layout wrap>
 			<v-flex xs12 md10>
+				<v-skeleton-loader
+					v-if="loading"
+					class="mx-auto"
+					type="card"
+				></v-skeleton-loader>
 				<v-card
 					xs12
 					md6
 					class="ma-4"
 					elevation="3"
-					v-for="post in posts"
+					v-for="post in posts.slice((page - 1) * 10, page * 10)"
 					:key="post.id"
 				>
 					<v-img :src="post.imageUrl" contain> </v-img>
@@ -33,6 +38,7 @@ export default {
 	data() {
 		return {
 			page: 1,
+			loading: true,
 		}
 	},
 	computed: {
@@ -41,8 +47,9 @@ export default {
 	methods: {
 		...mapActions(['getAllPosts']),
 	},
-	created: function () {
-		if (!this.posts.length) this.getAllPosts()
+	mounted: async function () {
+		if (!this.posts.length) await this.getAllPosts()
+		this.loading = false
 	},
 }
 </script>

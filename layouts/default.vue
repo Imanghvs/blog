@@ -62,6 +62,10 @@ export default {
 					title: 'مدیریت وبلاگ',
 					to: '/panel',
 				},
+				{
+					title: 'نظرات',
+					to: '/comments',
+				},
 			],
 			miniVariant: false,
 			right: true,
