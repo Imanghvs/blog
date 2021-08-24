@@ -25,7 +25,11 @@
 				</v-list>
 			</v-flex>
 			<v-flex xs12 md10>
-				<v-pagination v-model="page" :length="posts.length / 10"></v-pagination>
+				<v-pagination
+					v-show="posts.length"
+					v-model="page"
+					:length="posts.length / 10"
+				></v-pagination>
 			</v-flex>
 		</v-layout>
 	</v-container>
