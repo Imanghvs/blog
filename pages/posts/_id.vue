@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import Comment from '../../components/comment.vue'
 import CommentInput from '../../components/commentInput.vue'
 
@@ -41,7 +41,6 @@ export default {
 	},
 	components: { Comment, CommentInput },
 	methods: {
-		...mapActions(['getPost']),
 		...mapMutations({ loadPost: 'loadPost' }),
 	},
 	computed: { ...mapGetters(['posts', 'stateComments']) },

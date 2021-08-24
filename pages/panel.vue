@@ -3,7 +3,13 @@
 		<v-layout wrap>
 			<v-flex xs12 md10>
 				<!-- contents heading -->
-				<h1 class="heading">مطالب</h1>
+				<v-row class="pa-3">
+					<h1 class="heading">مطالب</h1>
+					<v-spacer></v-spacer>
+					<!-- to make a new post -->
+					<v-btn @click="newPost = !newPost" class="button"> مطلب جدید </v-btn>
+				</v-row>
+				<PostInput :open="newPost"></PostInput>
 				<!-- list of posts -->
 				<v-list two-line class="transparent">
 					<v-list-item
@@ -37,13 +43,17 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import PostInput from '../components/postInput.vue'
+
 export default {
 	name: 'panel',
 	data() {
 		return {
 			page: 1,
+			newPost: false,
 		}
 	},
+	components: { PostInput },
 	methods: {
 		...mapActions(['getAllPosts']),
 	},

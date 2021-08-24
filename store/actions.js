@@ -18,18 +18,22 @@ export default {
 	/**
 	 * fetches one post from server and then commits it.
 	 * @param {commit}
-	 * @param {Number} id
+	 * @param {Object} post
 	 */
-	getPost: async function ({ commit }, id) {
-		const post = await this.$axios.$get(baseURL + 'posts/' + id)
-		// since this image address has sanctioned Iran, we substitute it
-		// with a static file
-		console.log('post', post)
-		post.imageUrl =
-			post.imageUrl == 'https://i.picsum.photos/id/348/600/300.jpg'
-				? '/default.jpeg'
-				: post.imageUrl
-		commit('loadPost', post)
+	createPost: async function ({ commit }, newPost) {
+		console.log('new post: ', newPost)
+		let postId = 0
+		try {
+			const response = await this.$axios.$post(baseURL + 'posts/', {
+				...newPost,
+				userId: 10,
+				categoryId: 3,
+			})
+			postId = response.id
+		} catch (e) {
+			postId = Math.random() * 10000000 + 200
+		}
+		commit('loadPost', { ...newPost, id: postId })
 	},
 
 	getAllComments: async function ({ commit }) {
