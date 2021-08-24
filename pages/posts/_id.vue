@@ -2,10 +2,10 @@
 	<v-container class="mb-15">
 		<v-row justify="center">
 			<v-col xl="5" lg="7" md="10" sm="10">
-				<h1 class="blog-title">{{ post.title }}</h1>
-				<h4 class="blog-description">{{ post.content }}</h4>
 				<v-card class="mb-10" elevation="3">
 					<v-img :src="post.imageUrl"> </v-img>
+					<v-card-title>{{ post.title }}</v-card-title>
+					<v-card-text>{{ post.content }}</v-card-text>
 				</v-card>
 			</v-col>
 		</v-row>
