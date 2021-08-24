@@ -2,35 +2,72 @@
 	<v-container class="mb-15">
 		<v-row justify="center">
 			<v-col xl="5" lg="7" md="10" sm="10">
+				<v-skeleton-loader
+					v-if="loading"
+					class="mx-auto"
+					type="card"
+				></v-skeleton-loader>
 				<v-card class="mb-10" elevation="3">
 					<v-img :src="post.imageUrl"> </v-img>
 					<v-card-title>{{ post.title }}</v-card-title>
 					<v-card-text>{{ post.content }}</v-card-text>
 				</v-card>
+				<CommentInput
+					v-if="!loading"
+					:postId="this.post.id"
+					:postTitle="post.title"
+				></CommentInput>
+				<br />
+				<Comment
+					v-for="comment in stateComments.filter(com => com.postId == post.id)"
+					:key="comment.id"
+					:authorName="comment.authorName || 'ناشناس'"
+					:body="comment.body"
+				></Comment>
 			</v-col>
 		</v-row>
 	</v-container>
 </template>
 
 <script>
+import { mapActions, mapGetters, mapMutations } from 'vuex'
+import Comment from '../../components/comment.vue'
+import CommentInput from '../../components/commentInput.vue'
+
 export default {
 	name: 'post',
 	data() {
-		return { id: this.$route.params.id, post: {} }
+		return { id: this.$route.params.id, post: {}, loading: true }
 	},
+	components: { Comment, CommentInput },
+	methods: {
+		...mapActions(['getPost']),
+		...mapMutations({ loadPost: 'loadPost' }),
+	},
+	computed: { ...mapGetters(['posts', 'stateComments']) },
 	async mounted() {
-		const post = this.$route.query.title
-			? this.$route.query
-			: await this.$axios.$get(
-					`http://fakeapi.jsonparseronline.com/posts/${this.id}`,
-			  )
+		let post = {}
+		if (this.$route.query.title) {
+			post = this.$route.query
+			post.id = Number(post.id)
+			this.loadPost(post)
+		} else {
+			post = this.$route.query.title
+				? this.$route.query
+				: await this.$axios.$get(
+						`http://fakeapi.jsonparseronline.com/posts/${this.id}`,
+				  )
+			// since this image address has sanctioned Iran, we substitute it
+			// with a static file
+			post.imageUrl =
+				post.imageUrl == 'https://i.picsum.photos/id/348/600/300.jpg'
+					? '/default.jpeg'
+					: post.imageUrl
+		}
 		// since this image address has sanctioned Iran, we substitute it
 		// with a static file
-		post.imageUrl =
-			post.imageUrl == 'https://i.picsum.photos/id/348/600/300.jpg'
-				? '/default.jpeg'
-				: post.imageUrl
 		this.post = post
+		this.loading = false
 	},
 }
 </script>
